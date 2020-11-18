@@ -20,12 +20,6 @@ const IndexScreen = (props) => {
 
     return (
         <View>
-            <View style={styles.buttonContainer}>
-                <Button 
-                    title='Add Post'
-                    onPress={addBlogPost}
-                />
-            </View>
             <FlatList 
                 data={state}
                 keyExtractor={(blogPost) => { blogPost.title }}
@@ -47,9 +41,6 @@ const IndexScreen = (props) => {
 };
 
 const styles = StyleSheet.create({
-    buttonContainer: {
-        margin: 5,
-    },
     container: {
         flexDirection: 'row',
         justifyContent: 'space-between',

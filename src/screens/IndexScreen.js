@@ -6,7 +6,7 @@ import { Feather } from '@expo/vector-icons';
 
 const IndexScreen = (props) => {
     const { navigation } = props;
-    const { state, addBlogPost, deleteBlogPost } = useContext(BlogContext);
+    const { state, addBlogPost, deleteBlogPost, getBlogPosts } = useContext(BlogContext);
 
     useEffect(() => {
         navigation.setOptions({
@@ -15,8 +15,24 @@ const IndexScreen = (props) => {
                     <Feather name="plus" size={24} color="black" />
                 </TouchableOpacity>
             ),
-        }); 
+        })
     }, [navigation])
+
+    useEffect(() => {
+        getBlogPosts();
+
+        const listener = navigation.addListener('focus', () => {
+            getBlogPosts();
+        });
+        /* 
+            retornar função dentro de useEffect = vai ser apenas 
+        invocada quando a tela ser completamente mostrada na tela 
+        */
+        return () => { 
+            listener.remove();
+        };
+
+    }, [])
 
     return (
         <View>
